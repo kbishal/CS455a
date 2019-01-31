@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+        var tbl=$("<table/>").attr("id","mytable");
+	var q1 = 0.0, q2 = 0.0,  q3= 0.0, q4 = 0.0, tcount = 0.0;
+	var q5 = "";
+	var cc=1;
+        $("#div1").append(tbl);
+        for(var i=0;i<myObj.length;i++)
+        {
+		q1 = q1 + parseFloat(myObj[i].q1, 10);
+		q2 = q2 + parseFloat(myObj[i].q2, 10);
+		q3 = q3 + parseFloat(myObj[i].q3, 10);
+		q4 = q4 + parseFloat(myObj[i].q4, 10);
+		tcount = tcount+1;
+		if(myObj[i].q5 != ""){
+			q5 = q5 + "<p class=\"commentcls\">" + myObj[i].q5 + "<br></p>";
+			//q5 = "<button class=\"collapsible\">Comment-" + cc + "</button><div class=\"con\"><p>" + myObj[i].q5 + "</p></div>";
+			//cc = cc+1;
+			//$("body").append(q5);
+		}                
+                
+	    //var tr="<tr>";
+            //var td1="<td>"+myObj[i].q1+"</td>";
+           // var td2="<td>"+myObj[i].q2+"</td>";
+            //var td3="<td>"+myObj[i].q3+"</td></tr>";
+
+            //$("#mytable").append(tr+td1+td2+td3); 
+        }      
+
+	var tr1 = "<tr>";
+	var td11 = "<td>Are you satisfied overall with our products?</td>";
+	var td12 = "<td>" + q1/tcount +"</td></tr>";
+	var tr2 = "<tr>";
+	var td21 = "<td> Do you find our products easy to use? </td>"
+	var td22 = "<td>" + q2/tcount +"</td></tr>";
+	var tr3 = "<tr>";
+	var td31 = "<td> How much impact our products have made on your daily routine? </td>";
+	var td32 = "<td>" + q3/tcount + "</td></tr>";
+	var tr4 = "<tr>";
+	var td41 = "<td> Would you recommend our products to your friends and family? </td>";
+	var td42 = "<td>" + q4/tcount + "</td></tr>"; 
+	
+	$("#mytable").append(tr1+td11+td12+tr2+td21+td22+tr3+td31+td32+tr4+td41+td42);
+	$("#div2").append(q5);
+    }
+};
+xmlhttp.open("GET", "viewFeedback.php", true);
+xmlhttp.send();
+function showcontent(){
+	//alert("clicked");
+	var col = document.getElementById("div2");
+	if (col.style.display == "none"){
+		col.style.display = "block";
+	}else{
+		col.style.display = "none";
+	}
+}
+
+
+</script>
+
+
+<style>
+    #mytable,td{
+    border:1px solid black;
+}
+
+
+#div2 {
+    display:block;
+}
+
+</style>
+
+  </head>
+<body>
+
+<h2>Data Stored in the Feedback Table</h2>
+<div id="div1">
+
+</div>
+<br>
+<button onclick="showcontent()">Show more comments</button>
+<div id="div2">
+
+</div>
+</body>
+</html>
+

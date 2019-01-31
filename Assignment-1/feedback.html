@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Feedback</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script>
+            function validateForm()
+            {
+                var q1 = document.forms["feedback"]["q1"].value;
+                var q2 = document.forms["feedback"]["q2"].value;
+                var q3 = document.forms["feedback"]["q3"].value;
+ 		var q4 = document.forms["feedback"]["q4"].value;
+		var q5 = document.forms["feedback"]["q5"].value;
+		
+		if(q1 == ""){
+		    alert("ERROR! Enter value for Q1");
+		    return false;
+		}
+                
+		if(parseFloat(q1,10)>5 || parseFloat(q1, 10)<1){
+                    alert("ERROR! Q1 can take values between 1 and 5 only.");
+                    return false;
+                }
+
+		if(q2 == ""){
+		    alert("ERROR! Enter value for Q2");
+		    return false;
+		}
+		if(parseFloat(q2,10)>5 || parseFloat(q2, 10)<1){
+                    alert("ERROR! Q2 can take values between 1 and 5 only.");
+                    return false;
+                }
+		
+		if(q3 == ""){
+		    alert("ERROR! Enter value for Q3");
+		    return false;
+		}
+		if(parseFloat(q3,10)>5 || parseFloat(q3, 10)<1){
+                    alert("ERROR! Q3 can take values between 1 and 5 only.");
+                    return false;
+                }
+
+		
+		if(q4 == ""){
+		    alert("ERROR! Enter value for Q4");
+		    return false;
+		}
+		if(parseFloat(q4,10)>5 || parseFloat(q4, 10)<1){
+                    alert("ERROR! Q4 can take values between 1 and 5 only.");
+                    return false;
+                }
+                
+		if(q5.length > 500){
+		    alert("Character limit for comments exceeded! Should be less than 500 characters.");		
+		    return false;
+		}
+
+                
+                
+                return true;
+            }
+        </script>
+    </head>
+    <body>
+	<center> <h1> FEEDBACK FORM </h1></center>
+        <form action="./feedback.php" name="feedback" onsubmit="return validateForm()" method="post">
+            1. Are you satisfied overall with our products?<br>
+            <i>(1 means extremely dissatisfied, 5 means extremely satisfied.)</i><br>
+	    <input type="text" name="q1" value="" id="q1">
+            <br>
+            2. Do you find our products easy to use?<br>
+	    <i>(1 means they are not usable at all, 5 means they are extremely easy to use.)</i><br> 
+	    <input type="text" name="q2" value="" id="q2">
+            <br>
+            3. How much impact our products have made on your daily routine?<br>
+	    <i>(1 means no impact at all, 5 means a huge impact.)</i><br>
+            <input type="text" name="q3" value="" id="q3">
+            <br>
+	    4. Would you recommend our products to your friends and family?<br>
+	    <i>(1 means strongly advice against our products, 5 means strongly recommend our products.)</i><br>
+            <input type="text" name="q4" value="" id="q4">
+            <br>
+	    5. Any Comments?<br>
+	    <i>(not more than 500 characters.)</i><br>
+	    <input type="textarea" name="q5" value="" id="q5">
+	    <br>
+	    <br>
+	    <center>
+            <input type="submit" value="Submit" name="submit">
+	    </center>
+        </form>
+    </body>
+    
+</html>
